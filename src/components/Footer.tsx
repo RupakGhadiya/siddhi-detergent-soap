@@ -1,6 +1,7 @@
 import { useLanguage } from '../context/LanguageContext'
 import { COMPANY } from '../data/company'
 import { categories } from '../data/products'
+import { LOGO } from '../data/assets'
 import Icon from './Icon'
 
 interface FooterLink {
@@ -27,12 +28,9 @@ export default function Footer() {
         <div className="footer-grid">
           <div>
             <div className="brand">
-              <span className="brand-mark" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
+              <span className="brand-logo">
+                <img src={LOGO} alt="SIDDHI Detergent Soap" />
               </span>
-              SIDDHI
             </div>
             <p className="footer-about">
               {t('footer.tagline')} · {COMPANY.name}.
