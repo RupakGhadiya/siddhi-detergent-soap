@@ -7,3 +7,4 @@ export const asset = (file: string): string =>
 export const LOGO = asset('logo.webp')
 export const ALL_IN_ONE = asset('all in one.webp')
 export const LOGO_VIDEO = asset('logo Animation video.mp4')
+export const ALL_IN_ONE_VIDEO = asset('all in one video.mp4')

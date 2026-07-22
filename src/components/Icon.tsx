@@ -18,6 +18,8 @@ export type IconName =
   | 'send'
   | 'sparkle'
   | 'check'
+  | 'soundOn'
+  | 'soundOff'
   // feature / why
   | 'shield'
   | 'layers'
@@ -93,6 +95,18 @@ const paths: Record<IconName, JSX.Element> = {
     <path d="M12 3.5c.6 3.7 1.8 4.9 5.5 5.5-3.7.6-4.9 1.8-5.5 5.5-.6-3.7-1.8-4.9-5.5-5.5 3.7-.6 4.9-1.8 5.5-5.5ZM18.5 14c.3 1.6.8 2.1 2.5 2.5-1.7.4-2.2.9-2.5 2.5-.3-1.6-.8-2.1-2.5-2.5 1.7-.4 2.2-.9 2.5-2.5Z" />
   ),
   check: <path d="m4.5 12.5 5 5 10-11" />,
+  soundOn: (
+    <>
+      <path d="M4 9v6h3.5L13 19V5L7.5 9H4Z" />
+      <path d="M16.5 8.8a4.5 4.5 0 0 1 0 6.4M19 6.3a8 8 0 0 1 0 11.4" />
+    </>
+  ),
+  soundOff: (
+    <>
+      <path d="M4 9v6h3.5L13 19V5L7.5 9H4Z" />
+      <path d="m16.5 9.5 5 5M21.5 9.5l-5 5" />
+    </>
+  ),
   shield: (
     <>
       <path d="M12 3 5 6v5.5c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6l-7-3Z" />
