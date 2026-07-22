@@ -2035,11 +2035,12 @@ a.mi-value.link:hover {
 }
 .showcase-badge.b1 {
   top: 22px;
-  left: -16px;
+  right: -16px;
 }
 .showcase-badge.b2 {
-  bottom: 26px;
-  right: -14px;
+  bottom: -20px;
+  left: -10px;
+  right: auto;
 }
 
 @media (max-width: 900px) {
@@ -2054,7 +2055,8 @@ a.mi-value.link:hover {
     left: 10px;
   }
   .showcase-badge.b2 {
-    right: 10px;
+    left: 16px;
+    right: auto;
   }
 }
 @media (max-width: 520px) {
