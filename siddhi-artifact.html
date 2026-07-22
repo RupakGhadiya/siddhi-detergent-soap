@@ -1,0 +1,1002 @@
+<title>SIDDHI Detergent · Feel the Purity and Freshness</title>
+<style>
+  /* ============================================================
+     SIDDHI — "The Diamond Field"
+     Self-contained single-file build. System fonts only (CSP-safe).
+     ============================================================ */
+
+  :root {
+    /* Neutrals — blue-biased, chosen not defaulted */
+    --ground: #eaf3fd;
+    --surface: #ffffff;
+    --surface-2: #f3f8ff;
+    --ink: #0c2038;
+    --ink-soft: #3f5c7c;
+    --muted: #6f88a4;
+    --line: #dbe8f7;
+
+    /* Brand */
+    --brand: #1573d4;
+    --brand-deep: #0a4d9e;
+    --navy: #06284f;
+    --sky: #38b6ff;
+    --lemon: #ffcf33;
+
+    /* Packaging rainbow — categorical diamonds */
+    --d-blue: #1573d4;
+    --d-teal: #16bcc4;
+    --d-green: #1fae67;
+    --d-lemon: #ffc21f;
+    --d-orange: #ff7a1a;
+    --d-red: #e5372f;
+    --d-magenta: #e5327e;
+    --d-purple: #7a3ff2;
+
+    --hero-ink: #ffffff;
+    --hero-ground: radial-gradient(1100px 560px at 8% -8%, #1e88e5 0%, transparent 55%),
+      radial-gradient(820px 460px at 102% 4%, #29b6f6 0%, transparent 52%),
+      linear-gradient(158deg, #0a4d9e 0%, #135ba8 46%, #06284f 100%);
+
+    --shadow-sm: 0 2px 10px rgba(10, 77, 158, 0.07);
+    --shadow-md: 0 12px 30px rgba(10, 77, 158, 0.12);
+    --shadow-lg: 0 26px 60px rgba(6, 40, 79, 0.18);
+    --glow: 0 12px 38px rgba(33, 150, 243, 0.32);
+
+    --r-sm: 12px;
+    --r: 18px;
+    --r-lg: 26px;
+    --r-xl: 34px;
+    --maxw: 1180px;
+    --nav-h: 72px;
+
+    --font-display: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-gu: "Noto Sans Gujarati", "Gujarati Sangam MN", "Nirmala UI", "Shruti", system-ui, sans-serif;
+    --font: var(--font-body);
+    --font-head: var(--font-display);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #071626;
+      --surface: #0d2137;
+      --surface-2: #0a1b2d;
+      --ink: #eaf3ff;
+      --ink-soft: #aac3de;
+      --muted: #7f9bb8;
+      --line: rgba(255, 255, 255, 0.09);
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 14px 32px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 26px 60px rgba(0, 0, 0, 0.5);
+    }
+  }
+  /* Viewer toggle must win in both directions */
+  :root[data-theme="light"] {
+    --ground: #eaf3fd;
+    --surface: #ffffff;
+    --surface-2: #f3f8ff;
+    --ink: #0c2038;
+    --ink-soft: #3f5c7c;
+    --muted: #6f88a4;
+    --line: #dbe8f7;
+    --shadow-sm: 0 2px 10px rgba(10, 77, 158, 0.07);
+    --shadow-md: 0 12px 30px rgba(10, 77, 158, 0.12);
+    --shadow-lg: 0 26px 60px rgba(6, 40, 79, 0.18);
+  }
+  :root[data-theme="dark"] {
+    --ground: #071626;
+    --surface: #0d2137;
+    --surface-2: #0a1b2d;
+    --ink: #eaf3ff;
+    --ink-soft: #aac3de;
+    --muted: #7f9bb8;
+    --line: rgba(255, 255, 255, 0.09);
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 14px 32px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 26px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  #site {
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--ground);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  #site[data-lang="gu"] { --font: var(--font-gu); --font-head: var(--font-gu); }
+
+  #site a { color: inherit; text-decoration: none; }
+  #site button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  #site img { max-width: 100%; display: block; }
+  #site ::selection { background: var(--sky); color: #04233f; }
+
+  :focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 6px; }
+
+  .wrap {
+    width: 100%; max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: clamp(18px, 5vw, 40px);
+  }
+  .section { position: relative; padding-block: clamp(64px, 9vw, 118px); }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-head); font-weight: 700;
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brand); background: color-mix(in srgb, var(--brand) 10%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--brand) 22%, transparent);
+    padding: 7px 16px; border-radius: 100px;
+  }
+  #site[data-lang="gu"] .eyebrow { letter-spacing: 0.04em; text-transform: none; }
+  .eyebrow::before {
+    content: ""; width: 8px; height: 8px; border-radius: 2px;
+    background: var(--brand); transform: rotate(45deg);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 18%, transparent);
+  }
+
+  .h2 {
+    font-family: var(--font-head); font-weight: 700;
+    font-size: clamp(1.85rem, 4.1vw, 3rem); line-height: 1.12;
+    letter-spacing: -0.015em; text-wrap: balance; margin-top: 16px;
+  }
+  .lede { color: var(--ink-soft); font-size: clamp(1rem, 1.35vw, 1.12rem); max-width: 60ch; margin-top: 14px; }
+  .center { text-align: center; }
+  .center .lede { margin-inline: auto; }
+  .grad {
+    background: linear-gradient(115deg, var(--brand), var(--sky));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    font-family: var(--font-head); font-weight: 700; font-size: 1rem;
+    padding: 14px 28px; border-radius: 100px;
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s, background .25s, color .25s;
+  }
+  .btn-primary { background: linear-gradient(120deg, var(--brand), var(--brand-deep)); color: #fff; box-shadow: var(--glow); }
+  .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 18px 46px rgba(33,150,243,.42); }
+  .btn-light { background: #fff; color: var(--brand-deep); box-shadow: var(--shadow-md); }
+  .btn-light:hover { transform: translateY(-3px); }
+  .btn-ghost { background: rgba(255,255,255,.12); color: #fff; border: 1.5px solid rgba(255,255,255,.4); backdrop-filter: blur(6px); }
+  .btn-ghost:hover { background: rgba(255,255,255,.22); transform: translateY(-3px); }
+  .btn-outline { background: var(--surface); color: var(--brand); border: 1.6px solid var(--line); }
+  .btn-outline:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--sky); }
+  .btn-lg { padding: 16px 34px; font-size: 1.04rem; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ============================ NAV ============================ */
+  #nav {
+    position: fixed; inset: 0 0 auto 0; height: var(--nav-h); z-index: 100;
+    display: flex; align-items: center;
+    transition: background .35s, box-shadow .35s, backdrop-filter .35s, border-color .35s;
+    border-bottom: 1px solid transparent;
+  }
+  #nav.scrolled {
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 6px 24px rgba(6,40,79,.09);
+    border-bottom-color: var(--line);
+  }
+  .nav-inner { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(18px,5vw,40px);
+    display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-family: var(--font-head); font-weight: 800; font-size: 1.42rem; letter-spacing: .04em; }
+  .brand-mark { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--sky), var(--brand-deep));
+    position: relative; overflow: hidden; box-shadow: var(--glow); flex-shrink: 0; }
+  .brand-mark b { position: absolute; background: #fff; border-radius: 50%; }
+  .brand-mark b:nth-child(1){ width:15px;height:15px;top:8px;left:7px;opacity:.95 }
+  .brand-mark b:nth-child(2){ width:10px;height:10px;bottom:7px;right:8px;opacity:.8 }
+  .brand-mark b:nth-child(3){ width:6px;height:6px;top:9px;right:11px;opacity:.6 }
+  #nav:not(.scrolled) .brand { color: #fff; }
+  #nav.scrolled .brand { color: var(--ink); }
+
+  .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+  .nav-links a { font-weight: 600; font-size: .96rem; position: relative; padding-block: 4px; transition: color .2s; }
+  #nav:not(.scrolled) .nav-links a { color: rgba(255,255,255,.9); }
+  #nav.scrolled .nav-links a { color: var(--ink-soft); }
+  .nav-links a::after { content:""; position:absolute; left:0; bottom:-2px; width:0; height:2.5px; border-radius:3px;
+    background: linear-gradient(90deg, var(--brand), var(--sky)); transition: width .3s; }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--sky); }
+
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .lang { display: inline-flex; gap: 2px; padding: 4px; border-radius: 100px;
+    background: rgba(255,255,255,.16); border: 1.5px solid rgba(255,255,255,.32); }
+  #nav.scrolled .lang { background: var(--surface-2); border-color: var(--line); }
+  .lang button { font-family: var(--font-head); font-weight: 700; font-size: .8rem; padding: 6px 13px; border-radius: 100px; opacity: .72; line-height: 1; transition: all .25s; }
+  #nav:not(.scrolled) .lang button { color: #fff; }
+  #nav.scrolled .lang button { color: var(--ink-soft); }
+  .lang button.on { background: linear-gradient(120deg, var(--brand), var(--brand-deep)); color: #fff; opacity: 1; box-shadow: 0 4px 14px rgba(33,150,243,.4); }
+  .nav-cta { display: inline-flex; }
+
+  .burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+  .burger span { width: 24px; height: 2.6px; border-radius: 3px; background: currentColor; transition: .3s; }
+  #nav:not(.scrolled) .burger { color: #fff; }
+  #nav.scrolled .burger { color: var(--ink); }
+  .burger.x span:nth-child(1){ transform: translateY(7.6px) rotate(45deg) }
+  .burger.x span:nth-child(2){ opacity: 0 }
+  .burger.x span:nth-child(3){ transform: translateY(-7.6px) rotate(-45deg) }
+
+  #mobile { position: fixed; inset: var(--nav-h) 0 auto 0; z-index: 99;
+    background: color-mix(in srgb, var(--surface) 97%, transparent); backdrop-filter: blur(18px);
+    box-shadow: var(--shadow-lg); border-bottom: 1px solid var(--line);
+    padding: 18px clamp(18px,5vw,40px) 26px; display: none; flex-direction: column; gap: 4px; }
+  #mobile.open { display: flex; }
+  #mobile a { font-family: var(--font-head); font-weight: 600; font-size: 1.08rem; color: var(--ink); padding: 13px 6px; border-bottom: 1px solid var(--line); }
+  #mobile a:last-child { border-bottom: none; }
+  #mobile .btn { margin-top: 12px; }
+
+  /* ============================ BUBBLES ============================ */
+  .bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .bubble { position: absolute; bottom: -130px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.12) 60%, transparent 70%);
+    border: 1px solid rgba(255,255,255,.28); animation: rise linear infinite; opacity: 0; }
+  @keyframes rise {
+    0% { transform: translateY(0) scale(.6); opacity: 0; }
+    12% { opacity: .7; }
+    88% { opacity: .5; }
+    100% { transform: translateY(-118vh) scale(1.05); opacity: 0; }
+  }
+
+  /* ============================ HERO ============================ */
+  #home { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden;
+    background: var(--hero-ground); color: var(--hero-ink); padding-top: var(--nav-h); }
+  .hero-glow { position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; }
+  .hero-glow.a { width: 440px; height: 440px; background: #29b6f6; top: -120px; right: -70px; opacity: .5; }
+  .hero-glow.b { width: 360px; height: 360px; background: #1de9b6; bottom: -140px; left: -100px; opacity: .3; }
+  .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 46px; align-items: center; width: 100%; }
+
+  .hero-badge { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: .9rem;
+    background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(8px);
+    padding: 9px 18px; border-radius: 100px; }
+  .hero-badge .d { width: 9px; height: 9px; border-radius: 2px; background: #7cffb2; transform: rotate(45deg); box-shadow: 0 0 0 4px rgba(124,255,178,.28); }
+  #home h1 { font-family: var(--font-head); font-weight: 800; font-size: clamp(2.5rem, 5.8vw, 4.4rem);
+    line-height: 1.04; letter-spacing: -.02em; margin-top: 22px; text-wrap: balance; }
+  #home h1 .accent { display: block; background: linear-gradient(118deg, #b3e5fc, #fff 42%, #80d8ff);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  #home .lead { margin-top: 20px; font-size: clamp(1rem, 1.45vw, 1.18rem); color: rgba(255,255,255,.9); max-width: 52ch; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+  .hero-stats { display: flex; gap: 34px; margin-top: 46px; flex-wrap: wrap; }
+  .hstat .n { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.7rem, 2.9vw, 2.4rem); line-height: 1;
+    background: linear-gradient(120deg, #fff, #b3e5fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hstat .l { font-size: .88rem; color: rgba(255,255,255,.78); margin-top: 5px; }
+  .hstat + .hstat { padding-left: 34px; border-left: 1px solid rgba(255,255,255,.2); }
+
+  /* Diamond board — signature motif from the catalog cover */
+  .hero-visual { position: relative; display: grid; place-items: center; min-height: 440px; }
+  .board { position: relative; width: min(400px, 84%); aspect-ratio: 1; transform: rotate(45deg);
+    display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 12px; }
+  .tile { border-radius: 12px; position: relative; overflow: hidden; opacity: 0;
+    animation: pop .6s cubic-bezier(.34,1.56,.64,1) forwards; box-shadow: 0 14px 30px rgba(4,25,60,.34); }
+  .tile::before { content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.45), transparent 55%); }
+  @keyframes pop { to { opacity: 1; transform: scale(1); } }
+  .tile.glass { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3); box-shadow: none; }
+  .tile.float { animation: pop .6s cubic-bezier(.34,1.56,.64,1) forwards, bob 5s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{ translate: 0 0 } 50%{ translate: 0 -8px } }
+  .tile .logo { position: absolute; inset: 0; display: grid; place-items: center; transform: rotate(-45deg);
+    font-family: var(--font-head); font-weight: 800; color: #fff; font-size: .78rem; letter-spacing: .06em;
+    text-shadow: 0 2px 6px rgba(0,0,0,.3); }
+
+  .chip { position: absolute; z-index: 5; background: rgba(255,255,255,.96); color: var(--brand-deep);
+    font-family: var(--font-head); font-weight: 700; font-size: .82rem; padding: 9px 15px; border-radius: 100px;
+    box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 7px; animation: bob 4.4s ease-in-out infinite; }
+  .chip.c1 { top: 8%; right: 0; }
+  .chip.c2 { bottom: 10%; left: -2%; animation-delay: .6s; }
+  .chip .s { width: 9px; height: 9px; border-radius: 2px; transform: rotate(45deg); }
+
+  .wave { position: absolute; left: 0; right: 0; bottom: -1px; line-height: 0; z-index: 1; }
+  .wave svg { width: 100%; height: clamp(48px, 7vw, 100px); display: block; }
+  .wave path { fill: var(--ground); }
+
+  /* ============================ MARQUEE ============================ */
+  .marquee { background: linear-gradient(120deg, var(--brand), var(--brand-deep)); color: #fff; padding-block: 18px; overflow: hidden; }
+  .mtrack { display: flex; gap: 46px; width: max-content; animation: scrollx 28s linear infinite; }
+  .mitem { display: inline-flex; align-items: center; gap: 13px; font-family: var(--font-head); font-weight: 700; font-size: 1.2rem; white-space: nowrap; }
+  .mitem .s { width: 8px; height: 8px; border-radius: 2px; transform: rotate(45deg); background: #7cffb2; }
+  @keyframes scrollx { to { transform: translateX(-50%); } }
+
+  /* ============================ ABOUT ============================ */
+  #about { background: var(--surface); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .about-copy p { color: var(--ink-soft); font-size: 1.04rem; margin-top: 18px; }
+  .fcards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 24px 22px;
+    box-shadow: var(--shadow-sm); transition: transform .3s, box-shadow .3s, border-color .3s; }
+  .fcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: color-mix(in srgb, var(--brand) 30%, transparent); }
+  .fic { width: 50px; height: 50px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 14px;
+    color: #fff; box-shadow: var(--glow); }
+  .fcard h4 { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; }
+  .fcard p { color: var(--muted); font-size: .92rem; margin-top: 6px; }
+
+  /* icon glyphs (CSS) */
+  .g { width: 24px; height: 24px; position: relative; }
+  .g-shield { background: currentColor; -webkit-mask: radial-gradient(circle at 50% 40%, #000 60%, transparent 62%); }
+  .ico { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; line-height: 1; }
+
+  /* ============================ PRODUCTS ============================ */
+  #products { background: linear-gradient(180deg, var(--ground), color-mix(in srgb, var(--brand) 8%, var(--ground))); }
+  .phead { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 34px; }
+  .fbtn { font-family: var(--font-head); font-weight: 600; font-size: .92rem; padding: 10px 20px; border-radius: 100px;
+    color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--line); transition: all .25s; }
+  .fbtn:hover { border-color: var(--sky); color: var(--brand); transform: translateY(-2px); }
+  .fbtn.on { background: linear-gradient(120deg, var(--brand), var(--brand-deep)); color: #fff; border-color: transparent; box-shadow: var(--glow); }
+
+  .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 26px; margin-top: 46px; }
+  .pcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden;
+    box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
+    transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s; }
+  .pcard:hover { transform: translateY(-9px); box-shadow: var(--shadow-lg); }
+  .pcard.hide { display: none; }
+  .pcard.enter { animation: cardin .45s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes cardin { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
+
+  .pvis { position: relative; height: 178px; display: grid; place-items: center; overflow: hidden;
+    background: linear-gradient(142deg, var(--a), var(--b)); }
+  .pvis::before { content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 24% 18%, rgba(255,255,255,.4), transparent 46%),
+      radial-gradient(circle at 82% 92%, rgba(255,255,255,.16), transparent 42%); }
+  .pvis i.bub { position: absolute; border-radius: 50%; background: rgba(255,255,255,.32); animation: floaty 4s ease-in-out infinite; }
+  .pvis i.bub:nth-of-type(1){ width:20px;height:20px;top:22px;right:28px }
+  .pvis i.bub:nth-of-type(2){ width:11px;height:11px;bottom:26px;left:32px;animation-delay:.8s }
+  .pvis i.bub:nth-of-type(3){ width:7px;height:7px;top:54px;left:44px;animation-delay:1.4s }
+  @keyframes floaty { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-11px) } }
+  .ptag { position: absolute; top: 13px; left: 13px; z-index: 3; background: rgba(255,255,255,.95); color: var(--ink);
+    font-family: var(--font-head); font-weight: 700; font-size: .74rem; padding: 5px 12px; border-radius: 100px; box-shadow: var(--shadow-sm); }
+
+  /* CSS product illustrations */
+  .art { position: relative; z-index: 2; transition: transform .4s cubic-bezier(.34,1.56,.64,1); filter: drop-shadow(0 10px 16px rgba(0,0,0,.22)); }
+  .pcard:hover .art { transform: scale(1.08) rotate(-4deg); }
+  /* bag */
+  .art.bag { width: 78px; height: 92px; background: rgba(255,255,255,.94); border-radius: 8px 8px 10px 10px; }
+  .art.bag::before { content:""; position:absolute; top:-14px; left:50%; translate:-50% 0; width:44px; height:26px; border:5px solid rgba(255,255,255,.94); border-bottom:none; border-radius:22px 22px 0 0; }
+  .art.bag::after { content:""; position:absolute; inset: 30px 12px 16px; background: var(--b); opacity:.5; border-radius:5px; }
+  /* box / cake */
+  .art.box { width: 92px; height: 74px; background: rgba(255,255,255,.94); border-radius: 8px; }
+  .art.box::before { content:""; position:absolute; inset: 16px 12px auto; height: 22px; background: var(--a); border-radius: 4px; opacity:.85; }
+  .art.box::after { content:""; position:absolute; left:12px; right:12px; bottom:12px; height:8px; background: var(--b); opacity:.55; border-radius:3px; }
+  /* bar */
+  .art.bar { width: 96px; height: 46px; background: rgba(255,255,255,.94); border-radius: 8px; }
+  .art.bar::before { content:""; position:absolute; inset: 10px 12px; background: repeating-linear-gradient(90deg, transparent 0 10px, rgba(0,0,0,.06) 10px 12px); border-radius: 4px; }
+  .art.bar::after { content:""; position:absolute; top:-9px; left:14px; right:14px; height:14px; background: var(--a); border-radius:4px; opacity:.9; }
+  /* bottle */
+  .art.bottle { width: 52px; height: 96px; background: rgba(255,255,255,.94); border-radius: 12px 12px 14px 14px; }
+  .art.bottle::before { content:""; position:absolute; top:-16px; left:50%; translate:-50% 0; width:22px; height:18px; background: var(--b); border-radius:4px 4px 2px 2px; }
+  .art.bottle::after { content:""; position:absolute; inset: 30px 9px 14px; background: var(--a); opacity:.55; border-radius:6px; }
+  /* shampoo (slim tall) */
+  .art.shampoo { width: 46px; height: 98px; background: rgba(255,255,255,.94); border-radius: 10px 10px 12px 12px; }
+  .art.shampoo::before { content:""; position:absolute; top:-13px; left:50%; translate:-50% 0; width:26px; height:14px; background: var(--b); border-radius: 6px 6px 3px 3px; }
+  .art.shampoo::after { content:""; position:absolute; inset: 26px 8px 30px; background: var(--a); opacity:.5; border-radius:5px; }
+
+  .pbody { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  .pbody h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.16rem; line-height: 1.25; }
+  .psub { color: var(--brand); font-weight: 600; font-size: .86rem; margin-top: 5px; }
+  .pdesc { color: var(--muted); font-size: .9rem; margin-top: 11px; flex: 1; }
+  .pfeat { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .pfeat span { font-size: .74rem; font-weight: 600; color: var(--brand);
+    background: color-mix(in srgb, var(--brand) 10%, var(--surface)); border: 1px solid color-mix(in srgb, var(--brand) 20%, transparent);
+    padding: 5px 10px; border-radius: 100px; }
+  .pfoot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); }
+  .psize { font-size: .8rem; color: var(--ink-soft); font-weight: 600; }
+  .pdot { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+    background: color-mix(in srgb, var(--brand) 12%, var(--surface)); color: var(--brand); transition: all .3s; }
+  .pcard:hover .pdot { background: linear-gradient(120deg, var(--brand), var(--brand-deep)); color: #fff; transform: rotate(-45deg); }
+
+  /* ============================ WHY ============================ */
+  #why { background: var(--surface); }
+  .whygrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; margin-top: 50px; }
+  .why { position: relative; padding: 32px 26px; border-radius: var(--r-lg); overflow: hidden;
+    background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--brand) 8%, var(--surface)));
+    border: 1px solid var(--line); transition: transform .35s, box-shadow .35s; }
+  .why:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+  .why .num { position: absolute; top: 14px; right: 18px; font-family: var(--font-head); font-weight: 800; font-size: 3.2rem; line-height: 1;
+    color: color-mix(in srgb, var(--brand) 16%, transparent); }
+  .why .wic { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 18px;
+    color: #fff; box-shadow: var(--glow); }
+  .why h4 { font-family: var(--font-head); font-weight: 700; font-size: 1.18rem; position: relative; }
+  .why p { color: var(--ink-soft); font-size: .93rem; margin-top: 9px; }
+
+  /* ============================ CONTACT ============================ */
+  #contact { background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 8%, var(--ground)), var(--ground)); }
+  .cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 48px; }
+  .cpanel { position: relative; overflow: hidden; color: #fff; border-radius: var(--r-xl); padding: clamp(28px,4vw,46px);
+    background: var(--hero-ground); box-shadow: var(--shadow-lg); }
+  .cpanel .cbrand { font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.72); font-weight: 600; }
+  #site[data-lang="gu"] .cpanel .cbrand { letter-spacing: .04em; text-transform: none; }
+  .cpanel h3 { font-family: var(--font-head); font-weight: 700; font-size: 1.45rem; margin-top: 6px; position: relative; z-index: 2; }
+  .clist { margin-top: 26px; display: flex; flex-direction: column; gap: 18px; position: relative; z-index: 2; }
+  .citem { display: flex; align-items: center; gap: 15px; }
+  .cic { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 1.3rem; flex-shrink: 0;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); }
+  .clabel { font-size: .78rem; color: rgba(255,255,255,.72); text-transform: uppercase; letter-spacing: .08em; }
+  #site[data-lang="gu"] .clabel { letter-spacing: .03em; text-transform: none; }
+  .cval { font-family: var(--font-head); font-weight: 700; font-size: 1.02rem; word-break: break-word; }
+  a.cval:hover { color: #7cffb2; }
+
+  .cform { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-xl); padding: clamp(26px,4vw,42px); box-shadow: var(--shadow-md); }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-weight: 600; font-size: .88rem; color: var(--ink-soft); margin-bottom: 7px; }
+  .field input, .field textarea { width: 100%; font-family: inherit; font-size: 1rem; color: var(--ink);
+    padding: 13px 15px; border-radius: var(--r-sm); border: 1.6px solid var(--line); background: var(--surface-2); transition: border-color .2s, box-shadow .2s, background .2s; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--sky); background: var(--surface); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sky) 22%, transparent); }
+  .field textarea { resize: vertical; min-height: 108px; }
+  .fnote { font-size: .84rem; color: var(--muted); margin-top: 12px; text-align: center; }
+  .fok { display: none; align-items: center; gap: 9px; background: color-mix(in srgb, #1fae67 16%, var(--surface));
+    border: 1px solid color-mix(in srgb, #1fae67 40%, transparent); color: #12894e; border-radius: var(--r-sm); padding: 13px 15px; font-weight: 600; font-size: .93rem; margin-bottom: 16px; }
+  .fok.show { display: flex; }
+
+  /* ============================ FOOTER ============================ */
+  #foot { background: var(--navy); color: rgba(255,255,255,.82); padding-top: 64px; }
+  :root[data-theme="dark"] #foot, .dark-navy { background: #04203f; }
+  .fgrid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 38px; padding-bottom: 46px; }
+  #foot .brand { color: #fff; }
+  .fabout { color: rgba(255,255,255,.66); font-size: .93rem; margin-top: 16px; max-width: 300px; }
+  .fsoc { display: flex; gap: 11px; margin-top: 20px; }
+  .fsoc a { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 1.05rem;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); transition: all .25s; }
+  .fsoc a:hover { background: linear-gradient(120deg, var(--brand), var(--brand-deep)); transform: translateY(-4px); }
+  .fcol h5 { font-family: var(--font-head); font-weight: 700; font-size: 1.02rem; color: #fff; margin-bottom: 16px; }
+  .fcol ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .fcol a, .fcol li { font-size: .92rem; color: rgba(255,255,255,.66); transition: color .2s, padding-left .2s; }
+  .fcol a:hover { color: #fff; padding-left: 5px; }
+  .fbot { border-top: 1px solid rgba(255,255,255,.12); padding-block: 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: .87rem; color: rgba(255,255,255,.6); }
+  .fbot .hh { color: #ff6b81; }
+
+  /* FAB */
+  .fab-wrap { position: fixed; right: 20px; bottom: 22px; z-index: 90; display: flex; flex-direction: column; gap: 11px; }
+  .fab { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; font-size: 1.25rem; color: #fff; box-shadow: var(--shadow-lg); transition: transform .25s; }
+  .fab:hover { transform: translateY(-4px) scale(1.06); }
+  .fab.wa { background: #25d366; }
+  .fab.up { background: linear-gradient(120deg, var(--brand), var(--brand-deep)); opacity: 0; pointer-events: none; transition: opacity .3s, transform .25s; }
+  .fab.up.show { opacity: 1; pointer-events: auto; }
+
+  /* ============================ RESPONSIVE ============================ */
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+    .hero-badge, #home .lead { margin-inline: auto; }
+    .hero-cta, .hero-stats { justify-content: center; }
+    .hero-visual { min-height: 340px; order: -1; }
+    .about-grid, .cgrid { grid-template-columns: 1fr; gap: 36px; }
+    .fgrid { grid-template-columns: 1fr 1fr; gap: 30px; }
+  }
+  @media (max-width: 760px) {
+    .nav-links, .nav-cta { display: none; }
+    .burger { display: flex; }
+    .fcards { grid-template-columns: 1fr; }
+    .hstat + .hstat { padding-left: 22px; }
+    .hero-stats { gap: 22px; }
+  }
+  @media (max-width: 520px) {
+    .fgrid { grid-template-columns: 1fr; }
+    .pgrid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    .bubble { display: none; }
+    .reveal { opacity: 1; transform: none; }
+    .tile { opacity: 1; }
+  }
+</style>
+
+<div id="site" data-lang="en">
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#home" class="brand"><span class="brand-mark"><b></b><b></b><b></b></span>SIDDHI</a>
+      <ul class="nav-links">
+        <li><a href="#home" data-i18n="nav.home">Home</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#products" data-i18n="nav.products">Products</a></li>
+        <li><a href="#why" data-i18n="nav.why">Why Siddhi</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang" role="group" aria-label="Language">
+          <button data-lang-btn="en" class="on">EN</button>
+          <button data-lang-btn="gu">ગુજ</button>
+        </div>
+        <a href="#contact" class="btn btn-primary nav-cta" data-i18n="common.dealer">Become a Dealer</a>
+        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div id="mobile">
+      <a href="#home" data-i18n="nav.home">Home</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#products" data-i18n="nav.products">Products</a>
+      <a href="#why" data-i18n="nav.why">Why Siddhi</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a href="#contact" class="btn btn-primary" data-i18n="common.dealer">Become a Dealer</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home">
+    <div class="hero-glow a"></div>
+    <div class="hero-glow b"></div>
+    <div class="bubbles" id="heroBubbles" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <span class="hero-badge"><span class="d"></span><span data-i18n="hero.badge">A Trusted Quality Product</span></span>
+        <h1><span data-i18n="hero.title">Feel the Purity</span><span class="accent" data-i18n="hero.titleAccent">and Freshness</span></h1>
+        <p class="lead" data-i18n="hero.sub">Premium detergent powders, cakes, liquids and herbal shampoos — trusted quality from Saurashtra for a cleaner, brighter home.</p>
+        <div class="hero-cta">
+          <a href="#products" class="btn btn-light btn-lg"><span data-i18n="hero.cta">Explore Products</span> →</a>
+          <a href="#contact" class="btn btn-ghost btn-lg" data-i18n="hero.cta2">Contact Us</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat"><div class="n" data-i18n="hero.s1v">12+</div><div class="l" data-i18n="hero.s1">Products</div></div>
+          <div class="hstat"><div class="n" data-i18n="hero.s2v">10+</div><div class="l" data-i18n="hero.s2">Years of Trust</div></div>
+          <div class="hstat"><div class="n" data-i18n="hero.s3v">50K+</div><div class="l" data-i18n="hero.s3">Happy Homes</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="board" id="board" aria-hidden="true"></div>
+        <div class="chip c1"><span class="s" style="background:var(--d-green)"></span>2X Power</div>
+        <div class="chip c2"><span class="s" style="background:var(--d-magenta)"></span><span data-i18n="hero.chip">Fresh Fragrance</span></div>
+      </div>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C240,120 480,120 720,80 C960,40 1200,0 1440,48 L1440,120 L0,120 Z"></path></svg>
+    </div>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true"><div class="mtrack" id="mtrack"></div></div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <span class="eyebrow reveal" data-i18n="about.tag">About Us</span>
+        <h2 class="h2 reveal" data-i18n="about.title">Trusted Quality, Crafted with Care</h2>
+        <p class="reveal" data-i18n="about.p1">SIDDHI is a flagship brand of Vrajbhoomi Chemicals Private Limited, based in the industrial hub of Junagadh, Gujarat. We manufacture a complete range of home-cleaning products built on one simple promise — trusted quality at an honest price.</p>
+        <p class="reveal" data-i18n="about.p2">From powerful washing powders and value detergent cakes to advanced liquids and herbal shampoos, every SIDDHI product is made to bring purity and freshness into millions of Indian homes.</p>
+      </div>
+      <div class="fcards" id="fcards"></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section" id="products">
+    <div class="wrap">
+      <div class="phead">
+        <span class="eyebrow reveal" data-i18n="prod.tag">Our Products</span>
+        <h2 class="h2 reveal" data-i18n="prod.title">A Complete Home-Care Range</h2>
+        <p class="lede reveal" data-i18n="prod.sub">From laundry to dishes to hair care — explore the full family of SIDDHI products.</p>
+        <div class="filters reveal" id="filters"></div>
+      </div>
+      <div class="pgrid" id="pgrid"></div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow reveal" data-i18n="why.tag">Why Choose Siddhi</span>
+        <h2 class="h2 reveal" data-i18n="why.title">Cleaner Clothes, Happier Homes</h2>
+        <p class="lede reveal" data-i18n="why.sub">Four reasons families across Gujarat trust SIDDHI every single day.</p>
+      </div>
+      <div class="whygrid" id="whygrid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow reveal" data-i18n="contact.tag">Get in Touch</span>
+        <h2 class="h2 reveal" data-i18n="contact.title">Let’s Connect</h2>
+        <p class="lede reveal" data-i18n="contact.sub">For orders, distribution or dealership enquiries, reach out to us anytime.</p>
+      </div>
+      <div class="cgrid">
+        <div class="cpanel reveal">
+          <div class="bubbles" aria-hidden="true" id="cBubbles"></div>
+          <div style="position:relative;z-index:2">
+            <div class="cbrand" data-i18n="contact.mfg">Manufactured By</div>
+            <h3>Vrajbhoomi Chemicals Private Limited</h3>
+          </div>
+          <div class="clist">
+            <div class="citem"><span class="cic">📞</span><div><div class="clabel" data-i18n="contact.phone">Phone</div><a class="cval" href="tel:+919998891090">+91 99988 91090</a></div></div>
+            <div class="citem"><span class="cic">✉️</span><div><div class="clabel" data-i18n="contact.email">Email</div><a class="cval" href="mailto:siddhidetergentcake@gmail.com">siddhidetergentcake@gmail.com</a></div></div>
+            <div class="citem"><span class="cic">📍</span><div><div class="clabel" data-i18n="contact.addr">Address</div><span class="cval" data-i18n="contact.addrv">GIDC-2, Sabalpur, Junagadh, Gujarat</span></div></div>
+          </div>
+        </div>
+        <div class="cform reveal">
+          <form id="cform">
+            <div class="fok" id="fok">✅ <span data-i18n="contact.note">We usually respond within 24 hours.</span></div>
+            <div class="field"><label for="nm" data-i18n="contact.fname">Your Name</label><input id="nm" name="nm" required autocomplete="name"></div>
+            <div class="field"><label for="ph" data-i18n="contact.fphone">Phone Number</label><input id="ph" name="ph" type="tel" required autocomplete="tel"></div>
+            <div class="field"><label for="msg" data-i18n="contact.fmsg">Your Message</label><textarea id="msg" name="msg" required></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%"><span data-i18n="contact.fsend">Send Enquiry</span> →</button>
+            <p class="fnote" data-i18n="contact.note">We usually respond within 24 hours.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="foot">
+    <div class="wrap">
+      <div class="fgrid">
+        <div>
+          <div class="brand"><span class="brand-mark"><b></b><b></b><b></b></span>SIDDHI</div>
+          <p class="fabout"><span data-i18n="footer.tagline">A Trusted Quality Product</span> · Vrajbhoomi Chemicals Private Limited.</p>
+          <div class="fsoc">
+            <a href="https://wa.me/919998891090" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            <a href="mailto:siddhidetergentcake@gmail.com" aria-label="Email">✉️</a>
+            <a href="tel:+919998891090" aria-label="Phone">📞</a>
+          </div>
+        </div>
+        <div class="fcol"><h5 data-i18n="footer.quick">Quick Links</h5><ul>
+          <li><a href="#home" data-i18n="nav.home">Home</a></li>
+          <li><a href="#about" data-i18n="nav.about">About</a></li>
+          <li><a href="#products" data-i18n="nav.products">Products</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul></div>
+        <div class="fcol"><h5 data-i18n="footer.prod">Products</h5><ul id="fprod"></ul></div>
+        <div class="fcol"><h5 data-i18n="footer.contact">Contact</h5><ul>
+          <li><a href="tel:+919998891090">+91 99988 91090</a></li>
+          <li><a href="mailto:siddhidetergentcake@gmail.com">siddhidetergentcake@gmail.com</a></li>
+          <li data-i18n="contact.addrv">GIDC-2, Sabalpur, Junagadh, Gujarat</li>
+        </ul></div>
+      </div>
+      <div class="fbot">
+        <span>© 2026 Vrajbhoomi Chemicals Private Limited. <span data-i18n="footer.rights">All rights reserved.</span></span>
+        <span><span data-i18n="footer.made">Feel the Purity and Freshness</span> <span class="hh">♦</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="fab-wrap">
+    <a class="fab wa" href="https://wa.me/919998891090" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+    <button class="fab up" id="toTop" aria-label="Back to top">↑</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var site = document.getElementById("site");
+
+  /* ---------------- i18n strings ---------------- */
+  var I18N = {
+    en: {
+      nav: { home: "Home", about: "About", products: "Products", why: "Why Siddhi", contact: "Contact" },
+      common: { dealer: "Become a Dealer" },
+      hero: { badge: "A Trusted Quality Product", title: "Feel the Purity", titleAccent: "and Freshness",
+        sub: "Premium detergent powders, cakes, liquids and herbal shampoos — trusted quality from Saurashtra for a cleaner, brighter home.",
+        cta: "Explore Products", cta2: "Contact Us", chip: "Fresh Fragrance",
+        s1v: "12+", s1: "Products", s2v: "10+", s2: "Years of Trust", s3v: "50K+", s3: "Happy Homes" },
+      about: { tag: "About Us", title: "Trusted Quality, Crafted with Care",
+        p1: "SIDDHI is a flagship brand of Vrajbhoomi Chemicals Private Limited, based in the industrial hub of Junagadh, Gujarat. We manufacture a complete range of home-cleaning products built on one simple promise — trusted quality at an honest price.",
+        p2: "From powerful washing powders and value detergent cakes to advanced liquids and herbal shampoos, every SIDDHI product is made to bring purity and freshness into millions of Indian homes." },
+      prod: { tag: "Our Products", title: "A Complete Home-Care Range", sub: "From laundry to dishes to hair care — explore the full family of SIDDHI products." },
+      why: { tag: "Why Choose Siddhi", title: "Cleaner Clothes, Happier Homes", sub: "Four reasons families across Gujarat trust SIDDHI every single day." },
+      contact: { tag: "Get in Touch", title: "Let’s Connect", sub: "For orders, distribution or dealership enquiries, reach out to us anytime.",
+        mfg: "Manufactured By", phone: "Phone", email: "Email", addr: "Address", addrv: "GIDC-2, Sabalpur, Junagadh, Gujarat",
+        fname: "Your Name", fphone: "Phone Number", fmsg: "Your Message", fsend: "Send Enquiry", note: "We usually respond within 24 hours." },
+      footer: { tagline: "A Trusted Quality Product", quick: "Quick Links", prod: "Products", contact: "Contact", rights: "All rights reserved.", made: "Feel the Purity and Freshness" },
+      marquee: ["Purity", "Freshness", "Trusted Quality", "Sparkling Clean", "Pride of Saurashtra", "Honest Value"]
+    },
+    gu: {
+      nav: { home: "હોમ", about: "અમારા વિશે", products: "ઉત્પાદનો", why: "શા માટે સિદ્ધિ", contact: "સંપર્ક" },
+      common: { dealer: "ડીલર બનો" },
+      hero: { badge: "એક ભરોસાપાત્ર ગુણવત્તાયુક્ત ઉત્પાદન", title: "અનુભવો શુદ્ધતા", titleAccent: "અને તાજગી",
+        sub: "પ્રીમિયમ ડિટર્જન્ટ પાવડર, કેક, લિક્વિડ અને હર્બલ શેમ્પૂ — સ્વચ્છ અને ઉજળા ઘર માટે સૌરાષ્ટ્રની ભરોસાપાત્ર ગુણવત્તા.",
+        cta: "ઉત્પાદનો જુઓ", cta2: "સંપર્ક કરો", chip: "તાજી સુગંધ",
+        s1v: "૧૨+", s1: "ઉત્પાદનો", s2v: "૧૦+", s2: "વર્ષોનો ભરોસો", s3v: "૫૦K+", s3: "ખુશ ઘર" },
+      about: { tag: "અમારા વિશે", title: "ભરોસાપાત્ર ગુણવત્તા, કાળજી સાથે તૈયાર",
+        p1: "સિદ્ધિ એ જૂનાગઢ, ગુજરાતના ઔદ્યોગિક કેન્દ્રમાં આવેલ વ્રજભૂમિ કેમિકલ્સ પ્રાઇવેટ લિમિટેડની અગ્રણી બ્રાન્ડ છે. અમે એક સરળ વચન પર ઘર સફાઈના ઉત્પાદનોની સંપૂર્ણ શ્રેણી બનાવીએ છીએ — સાચી કિંમતે ભરોસાપાત્ર ગુણવત્તા.",
+        p2: "શક્તિશાળી વોશિંગ પાવડર અને વેલ્યુ ડિટર્જન્ટ કેકથી લઈને એડવાન્સ્ડ લિક્વિડ અને હર્બલ શેમ્પૂ સુધી, દરેક સિદ્ધિ ઉત્પાદન લાખો ભારતીય ઘરોમાં શુદ્ધતા અને તાજગી લાવવા માટે બનાવવામાં આવે છે." },
+      prod: { tag: "અમારા ઉત્પાદનો", title: "સંપૂર્ણ હોમ-કેર શ્રેણી", sub: "કપડાંથી લઈને વાસણ અને વાળની સંભાળ સુધી — સિદ્ધિ ઉત્પાદનોનો સંપૂર્ણ પરિવાર જુઓ." },
+      why: { tag: "શા માટે સિદ્ધિ પસંદ કરો", title: "સ્વચ્છ કપડાં, ખુશ ઘર", sub: "ગુજરાતભરના પરિવારો દરરોજ સિદ્ધિ પર ભરોસો કરે તેના ચાર કારણો." },
+      contact: { tag: "સંપર્કમાં રહો", title: "ચાલો જોડાઈએ", sub: "ઓર્ડર, વિતરણ અથવા ડીલરશિપ પૂછપરછ માટે અમારો કોઈપણ સમયે સંપર્ક કરો.",
+        mfg: "નિર્માતા", phone: "ફોન", email: "ઈમેલ", addr: "સરનામું", addrv: "GIDC-2, સાબલપુર, જૂનાગઢ, ગુજરાત",
+        fname: "તમારું નામ", fphone: "ફોન નંબર", fmsg: "તમારો સંદેશ", fsend: "પૂછપરછ મોકલો", note: "અમે સામાન્ય રીતે ૨૪ કલાકમાં જવાબ આપીએ છીએ." },
+      footer: { tagline: "એક ભરોસાપાત્ર ગુણવત્તાયુક્ત ઉત્પાદન", quick: "ઝડપી લિંક્સ", prod: "ઉત્પાદનો", contact: "સંપર્ક", rights: "સર્વ હક્ક સુરક્ષિત.", made: "અનુભવો શુદ્ધતા અને તાજગી" },
+      marquee: ["શુદ્ધતા", "તાજગી", "ભરોસાપાત્ર ગુણવત્તા", "ચમકદાર સફાઈ", "સૌરાષ્ટ્રનું ગૌરવ", "સાચી કિંમત"]
+    }
+  };
+
+  /* ---------------- Data ---------------- */
+  var CATS = [
+    { id: "all", en: "All Products", gu: "બધા ઉત્પાદનો" },
+    { id: "powder", en: "Powders", gu: "પાવડર" },
+    { id: "liquid", en: "Liquids", gu: "લિક્વિડ" },
+    { id: "cake", en: "Detergent Cakes", gu: "ડિટર્જન્ટ કેક" },
+    { id: "care", en: "Personal Care", gu: "પર્સનલ કેર" }
+  ];
+
+  var FEATURES = [
+    { c: "var(--d-blue)", ic: "🛡️", en: "Trusted Quality", gu: "ભરોસાપાત્ર ગુણવત્તા", den: "Every batch tested for consistent, dependable performance.", dgu: "સાતત્યપૂર્ણ કામગીરી માટે દરેક બેચનું પરીક્ષણ." },
+    { c: "var(--d-teal)", ic: "📦", en: "Complete Range", gu: "સંપૂર્ણ શ્રેણી", den: "Powders, cakes, liquids and personal care — all under one roof.", dgu: "પાવડર, કેક, લિક્વિડ અને પર્સનલ કેર — બધું એક છત નીચે." },
+    { c: "var(--d-orange)", ic: "🏭", en: "Made in Gujarat", gu: "ગુજરાતમાં નિર્મિત", den: "Proudly manufactured in GIDC-2, Sabalpur, Junagadh.", dgu: "ગર્વથી GIDC-2, સાબલપુર, જૂનાગઢમાં ઉત્પાદિત." },
+    { c: "var(--d-green)", ic: "💰", en: "Value for Money", gu: "પૈસાની પૂરી કિંમત", den: "Premium results at prices every family can afford.", dgu: "દરેક પરિવારને પરવડે તેવી કિંમતે પ્રીમિયમ પરિણામ." }
+  ];
+
+  var WHY = [
+    { c: "var(--d-blue)", ic: "💪", en: "Powerful Cleaning", gu: "શક્તિશાળી સફાઈ", den: "Advanced formulas remove the toughest stains while caring for your fabric and colours.", dgu: "એડવાન્સ્ડ ફોર્મ્યુલા કપડાં અને રંગની સંભાળ રાખતાં જિદ્દી ડાઘ દૂર કરે છે." },
+    { c: "var(--d-magenta)", ic: "🌸", en: "Fresh Fragrance", gu: "તાજી સુગંધ", den: "Long-lasting pleasant fragrance keeps your clothes and home smelling fresh.", dgu: "લાંબા સમય સુધી ટકતી સુખદ સુગંધ કપડાં અને ઘરને તાજું રાખે છે." },
+    { c: "var(--d-teal)", ic: "🤲", en: "Gentle & Safe", gu: "નરમ અને સલામત", den: "Formulated to be gentle on your hands and safe for washing machines.", dgu: "હાથ પર નરમ અને વોશિંગ મશીન માટે સલામત બનવા માટે તૈયાર." },
+    { c: "var(--d-orange)", ic: "🏷️", en: "Honest Pricing", gu: "સાચી કિંમત", den: "Premium quality at prices that make sense for every Indian household.", dgu: "દરેક ભારતીય ઘર માટે યોગ્ય કિંમતે પ્રીમિયમ ગુણવત્તા." }
+  ];
+
+  var PRODUCTS = [
+    { cat: "powder", art: "bag", a: "#f6a821", b: "#e8620c",
+      tag: { en: "Best Seller", gu: "બેસ્ટ સેલર" }, name: { en: "Siddhi Washing Powder", gu: "સિદ્ધિ વોશિંગ પાવડર" },
+      sub: { en: "With the Power of Lemon", gu: "લીંબુની તાકાત સાથે" },
+      desc: { en: "A powerful washing powder with a built-in whitening booster. Perfect for top-load and front-load machines as well as hand wash.", gu: "વ્હાઇટનિંગ બૂસ્ટર સાથેનો શક્તિશાળી વોશિંગ પાવડર. ટોપ-લોડ, ફ્રન્ટ-લોડ મશીન અને હાથ ધોવા બંને માટે યોગ્ય." },
+      feat: [{ en: "Whitening Booster", gu: "વ્હાઇટનિંગ બૂસ્ટર" }, { en: "Top & Front Load", gu: "ટોપ અને ફ્રન્ટ લોડ" }, { en: "Power of Lemon", gu: "લીંબુની તાકાત" }],
+      size: { en: "Available in carry bags", gu: "કેરી બેગમાં ઉપલબ્ધ" } },
+    { cat: "powder", art: "bag", a: "#2196f3", b: "#0a4d9e",
+      tag: { en: "Quickwash", gu: "ક્વિકવોશ" }, name: { en: "Siddhi Detergent Powder", gu: "સિદ્ધિ ડિટર્જન્ટ પાવડર" },
+      sub: { en: "Quickwash Formula", gu: "ક્વિકવોશ ફોર્મ્યુલા" },
+      desc: { en: "Advanced detergent powder that removes tough stains while caring for colours. More brightness with a long-lasting high fragrance.", gu: "એડવાન્સ્ડ ડિટર્જન્ટ પાવડર જે રંગની સંભાળ રાખતાં જિદ્દી ડાઘ દૂર કરે છે. વધુ ચમક અને લાંબા સમય સુધી ટકતી સુગંધ." },
+      feat: [{ en: "Removes Stains", gu: "ડાઘ દૂર કરે" }, { en: "Colour Care", gu: "રંગની સંભાળ" }, { en: "High Fragrance", gu: "ઉચ્ચ સુગંધ" }],
+      size: { en: "Multiple pack sizes", gu: "વિવિધ પેક સાઇઝ" } },
+    { cat: "liquid", art: "bottle", a: "#29b6f6", b: "#0277bd",
+      tag: { en: "All-in-One", gu: "ઓલ-ઇન-વન" }, name: { en: "Washing Machine Liquid", gu: "વોશિંગ મશીન લિક્વિડ" },
+      sub: { en: "Cleans, Shines & Removes Stains", gu: "સાફ, ચમક અને ડાઘ દૂર" },
+      desc: { en: "A premium liquid detergent that cleans, shines and removes stains in a single step. Keeps clothes fresh with a pleasant fragrance.", gu: "પ્રીમિયમ લિક્વિડ ડિટર્જન્ટ જે એક જ સ્ટેપમાં સાફ કરે, ચમકાવે અને ડાઘ દૂર કરે. સુખદ સુગંધ સાથે કપડાં તાજા રાખે." },
+      feat: [{ en: "One-Step Clean", gu: "વન-સ્ટેપ ક્લીન" }, { en: "Pleasant Fragrance", gu: "સુખદ સુગંધ" }, { en: "Machine Safe", gu: "મશીન સેફ" }],
+      size: { en: "In 1 Litre & 5 Litre", gu: "૧ લિટર અને ૫ લિટરમાં" } },
+    { cat: "liquid", art: "bottle", a: "#cddc39", b: "#8bc34a",
+      tag: { en: "2X Power", gu: "૨X પાવર" }, name: { en: "Siddhi Dishwash Liquid", gu: "સિદ્ધિ ડિશવોશ લિક્વિડ" },
+      sub: { en: "Clean & Shine · 2X Active", gu: "ક્લીન અને શાઇન · ૨X એક્ટિવ" },
+      desc: { en: "A concentrated dishwash liquid with 2X more active power that cuts through grease, leaving utensils sparkling clean and shiny.", gu: "૨X વધુ એક્ટિવ પાવર સાથેનું ડિશવોશ લિક્વિડ જે ચીકાશ દૂર કરી વાસણોને ચમકદાર બનાવે છે." },
+      feat: [{ en: "2X Active Power", gu: "૨X એક્ટિવ પાવર" }, { en: "Cuts Grease", gu: "ચીકાશ દૂર કરે" }, { en: "Sparkling Shine", gu: "ચમકદાર શાઇન" }],
+      size: { en: "In 500 ml & 5 Litre", gu: "૫૦૦ મિલી અને ૫ લિટરમાં" } },
+    { cat: "cake", art: "box", a: "#ffb300", b: "#f57c00",
+      tag: { en: "₹60 · 500g", gu: "₹૬૦ · ૫૦૦ગ્રામ" }, name: { en: "Herbal Detergent Cake", gu: "હર્બલ ડિટર્જન્ટ કેક" },
+      sub: { en: "Herbal Care for Clothes", gu: "કપડાં માટે હર્બલ સંભાળ" },
+      desc: { en: "A herbal detergent cake that is gentle on hands yet tough on dirt. Rich lather and effective cleaning at an affordable price.", gu: "હર્બલ ડિટર્જન્ટ કેક જે હાથ પર નરમ છતાં ડાઘ પર કઠોર છે. પરવડે તેવી કિંમતે સમૃદ્ધ ફીણ." },
+      feat: [{ en: "Herbal Formula", gu: "હર્બલ ફોર્મ્યુલા" }, { en: "Rich Lather", gu: "સમૃદ્ધ ફીણ" }, { en: "Gentle on Hands", gu: "હાથ પર નરમ" }],
+      size: { en: "500 gm · MRP ₹60", gu: "૫૦૦ ગ્રામ · MRP ₹૬૦" } },
+    { cat: "cake", art: "box", a: "#ef5350", b: "#c62828",
+      tag: { en: "₹60 · 800g", gu: "₹૬૦ · ૮૦૦ગ્રામ" }, name: { en: "Semi Detergent Cake", gu: "સેમી ડિટર્જન્ટ કેક" },
+      sub: { en: "Extra Brightness", gu: "એક્સ્ટ્રા બ્રાઇટનેસ" },
+      desc: { en: "A value-packed semi detergent cake delivering extra brightness with every wash. Bigger size, superb cleaning, long-lasting.", gu: "દરેક ધોવા સાથે એક્સ્ટ્રા બ્રાઇટનેસ આપતી વેલ્યુ-પેક્ડ સેમી ડિટર્જન્ટ કેક. મોટી સાઇઝ, ઉત્તમ સફાઈ." },
+      feat: [{ en: "Extra Brightness", gu: "એક્સ્ટ્રા બ્રાઇટનેસ" }, { en: "Bigger 800g", gu: "મોટી ૮૦૦ગ્રામ" }, { en: "Value Pack", gu: "વેલ્યુ પેક" }],
+      size: { en: "800 gm · MRP ₹60", gu: "૮૦૦ ગ્રામ · MRP ₹૬૦" } },
+    { cat: "cake", art: "bar", a: "#7e57c2", b: "#4527a0",
+      tag: { en: "White / Purple", gu: "સફેદ / જાંબલી" }, name: { en: "Detergent Cake (White / Purple)", gu: "ડિટર્જન્ટ કેક (સફેદ / જાંબલી)" },
+      sub: { en: "Strong Cleaning Bars", gu: "મજબૂત સફાઈ બાર" },
+      desc: { en: "Classic detergent cakes in white and purple that scrub off tough dirt and stains effortlessly for a bright, fresh finish.", gu: "સફેદ અને જાંબલી રંગની ક્લાસિક ડિટર્જન્ટ કેક જે જિદ્દી ડાઘ સરળતાથી દૂર કરી કપડાંને ઉજળા બનાવે છે." },
+      feat: [{ en: "Tough on Stains", gu: "ડાઘ પર કઠોર" }, { en: "Twin Colours", gu: "બે રંગ" }, { en: "Long Lasting", gu: "લાંબા સમય સુધી" }],
+      size: { en: "Economy multi-bar packs", gu: "ઇકોનોમી મલ્ટી-બાર પેક" } },
+    { cat: "cake", art: "bar", a: "#26c6da", b: "#00838f",
+      tag: { en: "Multi-Colour", gu: "મલ્ટી-કલર" }, name: { en: "Detergent Cake", gu: "ડિટર્જન્ટ કેક" },
+      sub: { en: "Blue · Yellow · Green", gu: "વાદળી · પીળી · લીલી" },
+      desc: { en: "Everyday detergent cakes in vibrant blue, yellow and green. Trusted quality for a spotless wash, every single day.", gu: "રોજિંદા ઉપયોગ માટે વાદળી, પીળી અને લીલી રંગમાં ડિટર્જન્ટ કેક. દરરોજ સ્વચ્છ ધોવા માટે ભરોસાપાત્ર ગુણવત્તા." },
+      feat: [{ en: "Everyday Use", gu: "રોજિંદો ઉપયોગ" }, { en: "Vibrant Colours", gu: "આકર્ષક રંગ" }, { en: "Trusted Quality", gu: "ભરોસાપાત્ર ગુણવત્તા" }],
+      size: { en: "Available in assorted colours", gu: "વિવિધ રંગોમાં ઉપલબ્ધ" } },
+    { cat: "cake", art: "box", a: "#ffca28", b: "#ff8f00",
+      tag: { en: "1.5 KG", gu: "૧.૫ કિલો" }, name: { en: "Detergent Cake (White)", gu: "ડિટર્જન્ટ કેક (સફેદ)" },
+      sub: { en: "Family Value Pack", gu: "ફેમિલી વેલ્યુ પેક" },
+      desc: { en: "A generous 1.5 kg pack of white detergent cakes for families. Superb dirt removal and brightness that lasts wash after wash.", gu: "પરિવારો માટે સફેદ ડિટર્જન્ટ કેકનું ૧.૫ કિલોનું મોટું પેક. ઉત્તમ ડાઘ સફાઈ અને દરેક ધોવે ટકતી ચમક." },
+      feat: [{ en: "Big 1.5 KG Pack", gu: "મોટું ૧.૫ કિલો" }, { en: "Family Size", gu: "ફેમિલી સાઇઝ" }, { en: "Superb Cleaning", gu: "ઉત્તમ સફાઈ" }],
+      size: { en: "Net Wt. 1.5 KG", gu: "નેટ વજન ૧.૫ કિલો" } },
+    { cat: "cake", art: "bar", a: "#ec407a", b: "#ad1457",
+      tag: { en: "Big Bar · ₹12", gu: "બિગ બાર · ₹૧૨" }, name: { en: "Big Bar Detergent Cake", gu: "બિગ બાર ડિટર્જન્ટ કેક" },
+      sub: { en: "Extra Brightness at ₹12", gu: "માત્ર ₹૧૨ માં એક્સ્ટ્રા બ્રાઇટનેસ" },
+      desc: { en: "A big value bar that delivers extra brightness at an unbeatable price of just ₹12. Maximum cleaning power for every household.", gu: "માત્ર ₹૧૨ ની અજોડ કિંમતે એક્સ્ટ્રા બ્રાઇટનેસ આપતી બિગ વેલ્યુ બાર. દરેક ઘર માટે મહત્તમ સફાઈ." },
+      feat: [{ en: "Only ₹12", gu: "માત્ર ₹૧૨" }, { en: "Big Bar", gu: "બિગ બાર" }, { en: "Extra Brightness", gu: "એક્સ્ટ્રા બ્રાઇટનેસ" }],
+      size: { en: "Big Bar · MRP ₹12", gu: "બિગ બાર · MRP ₹૧૨" } },
+    { cat: "care", art: "shampoo", a: "#8d6e63", b: "#4e342e",
+      tag: { en: "Herbal", gu: "હર્બલ" }, name: { en: "Prasiddhi Coconut Herbal Shampoo", gu: "પ્રસિદ્ધિ કોકોનટ હર્બલ શેમ્પૂ" },
+      sub: { en: "Shampoo + Conditioner", gu: "શેમ્પૂ + કંડિશનર" },
+      desc: { en: "A herbal coconut shampoo with built-in conditioner for long, strong, shiny and black hair. The purity of Saurashtra in every wash.", gu: "લાંબા, મજબૂત, ચમકદાર અને કાળા વાળ માટે કંડિશનર સાથેનું હર્બલ કોકોનટ શેમ્પૂ. દરેક વોશમાં સૌરાષ્ટ્રની શુદ્ધતા." },
+      feat: [{ en: "Shampoo + Conditioner", gu: "શેમ્પૂ + કંડિશનર" }, { en: "Long & Strong", gu: "લાંબા અને મજબૂત" }, { en: "Shiny & Black", gu: "ચમકદાર અને કાળા" }],
+      size: { en: "Herbal coconut formula", gu: "હર્બલ કોકોનટ ફોર્મ્યુલા" } },
+    { cat: "care", art: "shampoo", a: "#66bb6a", b: "#2e7d32",
+      tag: { en: "Shikakai + Amla", gu: "શિકાકાઈ + આમળા" }, name: { en: "Prasiddhi Herbal Shampoo", gu: "પ્રસિદ્ધિ હર્બલ શેમ્પૂ" },
+      sub: { en: "Shampoo + Conditioner + Amla", gu: "શેમ્પૂ + કંડિશનર + આમળા" },
+      desc: { en: "An ayurvedic-inspired herbal shampoo enriched with shikakai and amla. Nourishes the scalp and strengthens hair, naturally.", gu: "શિકાકાઈ અને આમળાથી સમૃદ્ધ આયુર્વેદ-પ્રેરિત હર્બલ શેમ્પૂ. કુદરતી રીતે માથાની ત્વચાને પોષણ આપી વાળ મજબૂત કરે છે." },
+      feat: [{ en: "Shikakai + Amla", gu: "શિકાકાઈ + આમળા" }, { en: "Nourishes Scalp", gu: "સ્કૅલ્પ પોષણ" }, { en: "Natural Care", gu: "કુદરતી સંભાળ" }],
+      size: { en: "Herbal ayurvedic formula", gu: "હર્બલ આયુર્વેદિક ફોર્મ્યુલા" } }
+  ];
+
+  /* ---------------- State + helpers ---------------- */
+  var lang = "en";
+  var activeCat = "all";
+  function tr(path) {
+    var parts = path.split("."), node = I18N[lang];
+    for (var i = 0; i < parts.length; i++) { if (node == null) break; node = node[parts[i]]; }
+    return node == null ? path : node;
+  }
+  function pick(o) { return o ? (o[lang] || o.en) : ""; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ---------------- Renders ---------------- */
+  function renderStatic() {
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) nodes[i].textContent = tr(nodes[i].getAttribute("data-i18n"));
+  }
+
+  function renderMarquee() {
+    var items = I18N[lang].marquee, loop = items.concat(items), html = "";
+    for (var i = 0; i < loop.length; i++) html += '<span class="mitem"><span class="s"></span>' + esc(loop[i]) + "</span>";
+    document.getElementById("mtrack").innerHTML = html;
+  }
+
+  function renderFeatures() {
+    var html = "";
+    for (var i = 0; i < FEATURES.length; i++) {
+      var f = FEATURES[i];
+      html += '<div class="fcard reveal"><div class="fic" style="background:linear-gradient(135deg,' + f.c + ',color-mix(in srgb,' + f.c + ' 60%,#000))"><span class="ico">' + f.ic + '</span></div><h4>' + esc(lang === "en" ? f.en : f.gu) + "</h4><p>" + esc(lang === "en" ? f.den : f.dgu) + "</p></div>";
+    }
+    document.getElementById("fcards").innerHTML = html;
+  }
+
+  function renderWhy() {
+    var html = "";
+    for (var i = 0; i < WHY.length; i++) {
+      var w = WHY[i];
+      html += '<div class="why reveal"><span class="num">0' + (i + 1) + '</span><div class="wic" style="background:linear-gradient(135deg,' + w.c + ',color-mix(in srgb,' + w.c + ' 60%,#000))"><span class="ico">' + w.ic + '</span></div><h4>' + esc(lang === "en" ? w.en : w.gu) + "</h4><p>" + esc(lang === "en" ? w.den : w.dgu) + "</p></div>";
+    }
+    document.getElementById("whygrid").innerHTML = html;
+  }
+
+  function renderFilters() {
+    var html = "";
+    for (var i = 0; i < CATS.length; i++) {
+      var c = CATS[i];
+      html += '<button class="fbtn' + (c.id === activeCat ? " on" : "") + '" data-cat="' + c.id + '">' + esc(lang === "en" ? c.en : c.gu) + "</button>";
+    }
+    document.getElementById("filters").innerHTML = html;
+  }
+
+  function renderProducts() {
+    var html = "";
+    for (var i = 0; i < PRODUCTS.length; i++) {
+      var p = PRODUCTS[i];
+      var show = activeCat === "all" || p.cat === activeCat;
+      var feats = "";
+      for (var j = 0; j < p.feat.length; j++) feats += "<span>" + esc(pick(p.feat[j])) + "</span>";
+      html += '<article class="pcard' + (show ? " enter" : " hide") + '" data-cat="' + p.cat + '">' +
+        '<div class="pvis" style="--a:' + p.a + ';--b:' + p.b + '">' +
+        '<span class="ptag">' + esc(pick(p.tag)) + "</span>" +
+        '<i class="bub"></i><i class="bub"></i><i class="bub"></i>' +
+        '<div class="art ' + p.art + '"></div></div>' +
+        '<div class="pbody"><h3>' + esc(pick(p.name)) + "</h3>" +
+        '<div class="psub">' + esc(pick(p.sub)) + "</div>" +
+        '<p class="pdesc">' + esc(pick(p.desc)) + "</p>" +
+        '<div class="pfeat">' + feats + "</div>" +
+        '<div class="pfoot"><span class="psize">' + esc(pick(p.size)) + '</span><span class="pdot" aria-hidden="true">→</span></div>' +
+        "</div></article>";
+    }
+    document.getElementById("pgrid").innerHTML = html;
+  }
+
+  function renderFooterProducts() {
+    var html = "";
+    for (var i = 1; i < CATS.length; i++) html += '<li><a href="#products">' + esc(lang === "en" ? CATS[i].en : CATS[i].gu) + "</a></li>";
+    document.getElementById("fprod").innerHTML = html;
+  }
+
+  function renderAll() {
+    renderStatic(); renderMarquee(); renderFeatures(); renderWhy();
+    renderFilters(); renderProducts(); renderFooterProducts();
+    site.setAttribute("data-lang", lang);
+    document.querySelectorAll("[data-lang-btn]").forEach(function (b) {
+      b.classList.toggle("on", b.getAttribute("data-lang-btn") === lang);
+    });
+    observeReveals();
+  }
+
+  /* ---------------- Diamond board ---------------- */
+  function buildBoard() {
+    var colors = ["--d-blue", "--d-magenta", "glass", "--d-green", "glass", "--d-lemon", "--d-orange", "glass", "--d-teal", "--d-purple", "glass", "--d-red", "glass", "--d-blue", "--d-green", "glass"];
+    var logoAt = 5; // a tile that shows SIDDHI
+    var floatSet = { 1: 1, 6: 1, 9: 1, 11: 1 };
+    var html = "";
+    for (var i = 0; i < 16; i++) {
+      var col = colors[i], isGlass = col === "glass";
+      var cls = "tile" + (isGlass ? " glass" : "") + (floatSet[i] ? " float" : "");
+      var style = "animation-delay:" + (0.15 + i * 0.05).toFixed(2) + "s;";
+      if (!isGlass) style += "background:linear-gradient(140deg,var(" + col + "),color-mix(in srgb,var(" + col + ") 62%,#000));";
+      html += '<div class="' + cls + '" style="' + style + '">' + (i === logoAt ? '<span class="logo">SIDDHI</span>' : "") + "</div>";
+    }
+    document.getElementById("board").innerHTML = html;
+  }
+
+  /* ---------------- Bubbles ---------------- */
+  function buildBubbles(el, n) {
+    var defs = [[6, 46, 14, 0], [18, 20, 11, 2], [28, 62, 18, 4], [40, 28, 13, 1], [52, 40, 16, 6], [63, 18, 10, 3], [72, 54, 19, 5], [83, 26, 12, 2], [92, 38, 15, 7], [47, 14, 9, 8]];
+    var html = "";
+    for (var i = 0; i < Math.min(n, defs.length); i++) {
+      var d = defs[i];
+      html += '<span class="bubble" style="left:' + d[0] + "%;width:" + d[1] + "px;height:" + d[1] + "px;animation-duration:" + d[2] + "s;animation-delay:" + d[3] + 's"></span>';
+    }
+    el.innerHTML = html;
+  }
+
+  /* ---------------- Scroll reveal ---------------- */
+  var io = null;
+  function observeReveals() {
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll(".reveal").forEach(function (n) { n.classList.add("in"); });
+      return;
+    }
+    if (io) io.disconnect();
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e, idx) {
+        if (e.isIntersecting) {
+          var sib = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
+          e.target.style.transitionDelay = Math.min(sib * 0.06, 0.3) + "s";
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "-40px" });
+    document.querySelectorAll(".reveal:not(.in)").forEach(function (n) { io.observe(n); });
+  }
+
+  /* ---------------- Events ---------------- */
+  document.querySelectorAll("[data-lang-btn]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var next = b.getAttribute("data-lang-btn");
+      if (next === lang) return;
+      lang = next;
+      renderAll();
+    });
+  });
+
+  document.getElementById("filters").addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-cat]");
+    if (!btn) return;
+    activeCat = btn.getAttribute("data-cat");
+    renderFilters();
+    renderProducts();
+  });
+
+  var nav = document.getElementById("nav");
+  var burger = document.getElementById("burger");
+  var mobile = document.getElementById("mobile");
+  burger.addEventListener("click", function () {
+    var open = mobile.classList.toggle("open");
+    burger.classList.toggle("x", open);
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  mobile.addEventListener("click", function (e) {
+    if (e.target.closest("a")) { mobile.classList.remove("open"); burger.classList.remove("x"); burger.setAttribute("aria-expanded", "false"); }
+  });
+
+  var toTop = document.getElementById("toTop");
+  function onScroll() {
+    nav.classList.toggle("scrolled", window.scrollY > 30);
+    toTop.classList.toggle("show", window.scrollY > 500);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+  document.getElementById("cform").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nm = document.getElementById("nm").value;
+    var ph = document.getElementById("ph").value;
+    var msg = document.getElementById("msg").value;
+    var text = encodeURIComponent("Name: " + nm + "\nPhone: " + ph + "\nMessage: " + msg);
+    window.open("https://wa.me/919998891090?text=" + text, "_blank", "noopener");
+    var ok = document.getElementById("fok");
+    ok.classList.add("show");
+    this.reset();
+    setTimeout(function () { ok.classList.remove("show"); }, 6000);
+  });
+
+  /* ---------------- Init ---------------- */
+  buildBoard();
+  buildBubbles(document.getElementById("heroBubbles"), 10);
+  buildBubbles(document.getElementById("cBubbles"), 6);
+  renderAll();
+  onScroll();
+})();
+</script>
