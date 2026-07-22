@@ -24,6 +24,10 @@ export default function Showcase() {
   // and the state isn't persisted, so a refresh returns to unmuted.
   const [inView, setInView] = useState(false)
   const [muted, setMuted] = useState(false)
+  // Browsers allow unmuted playback only after the user has interacted with the
+  // page at least once. We record that the moment it happens ANYWHERE, so audio
+  // is already cleared by the time this section scrolls into view.
+  const gesturedRef = useRef(false)
 
   useEffect(() => {
     const el = ref.current
@@ -36,51 +40,44 @@ export default function Showcase() {
     return () => io.disconnect()
   }, [])
 
-  // Best-effort audio+video autoplay. The video always plays; when it's in view
-  // and not muted we try to play it UNMUTED. If the browser blocks unmuted
-  // autoplay (it requires a prior user gesture) we fall back to muted playback
-  // without ever pausing the video.
+  // The video ALWAYS autoplays and loops (muted-safe, never paused). Audio is on
+  // whenever the section is in view, not muted, the tab is visible, and the user
+  // has interacted with the page at least once (browser requirement).
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
     const apply = () => {
-      if (inView && !muted && !document.hidden) {
-        v.muted = false
-        void v.play().catch(() => {
-          v.muted = true
-          void v.play().catch(() => {})
-        })
-      } else {
-        v.muted = true
-        if (v.paused) void v.play().catch(() => {})
-      }
+      v.muted = !(inView && !muted && !document.hidden && gesturedRef.current)
+      if (v.paused) void v.play().catch(() => {})
     }
     apply()
     document.addEventListener('visibilitychange', apply)
     return () => document.removeEventListener('visibilitychange', apply)
   }, [inView, muted])
 
-  // Browsers permit unmuted playback only after a user interacts with the page,
-  // so retry sound on the first gesture — audio then starts as early as allowed.
+  // Record the first real user gesture (anywhere) and immediately apply audio, so
+  // sound starts on its own when the section is/gets in view — no click required
+  // on the video itself.
   useEffect(() => {
-    const unlock = () => {
+    if (gesturedRef.current) return
+    const onGesture = () => {
+      gesturedRef.current = true
       const v = videoRef.current
-      if (v && inView && !muted && !document.hidden) {
-        v.muted = false
-        void v.play().catch(() => {
-          v.muted = true
-          void v.play().catch(() => {})
-        })
+      if (v) {
+        v.muted = !(inView && !muted && !document.hidden)
+        if (v.paused) void v.play().catch(() => {})
       }
+      cleanup()
     }
-    window.addEventListener('pointerdown', unlock)
-    window.addEventListener('keydown', unlock)
-    window.addEventListener('touchstart', unlock, { passive: true })
-    return () => {
-      window.removeEventListener('pointerdown', unlock)
-      window.removeEventListener('keydown', unlock)
-      window.removeEventListener('touchstart', unlock)
+    const cleanup = () => {
+      window.removeEventListener('pointerdown', onGesture)
+      window.removeEventListener('keydown', onGesture)
+      window.removeEventListener('touchstart', onGesture)
     }
+    window.addEventListener('pointerdown', onGesture)
+    window.addEventListener('keydown', onGesture)
+    window.addEventListener('touchstart', onGesture, { passive: true })
+    return cleanup
   }, [inView, muted])
 
   const points: Point[] = [
