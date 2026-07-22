@@ -19,11 +19,11 @@ export default function Showcase() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], [40, -40])
 
-  // Audio is scoped to this section only: it plays while the video is on screen
-  // and the user hasn't muted it, and is muted again the moment it scrolls away.
+  // Audio is scoped to this section: sound plays whenever the video is on screen
+  // and the user hasn't muted it. Unmuted by default — the toggle only mutes —
+  // and the state isn't persisted, so a refresh returns to unmuted.
   const [inView, setInView] = useState(false)
-  const [wantSound, setWantSound] = useState(true)
-  const [muted, setMuted] = useState(true)
+  const [muted, setMuted] = useState(false)
 
   useEffect(() => {
     const el = ref.current
@@ -36,38 +36,43 @@ export default function Showcase() {
     return () => io.disconnect()
   }, [])
 
-  // Apply the "sound only here" policy whenever visibility or intent changes.
+  // Apply the "sound only here" policy on view / mute / tab-visibility changes.
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
-    const shouldPlaySound = inView && wantSound
-    if (shouldPlaySound) {
-      v.muted = false
-      v.play()
-        .then(() => setMuted(false))
-        .catch(() => {
-          // Browser blocked unmuted autoplay — stay muted until a click gesture.
-          v.muted = true
-          setMuted(true)
-        })
-    } else {
-      v.muted = true
-      setMuted(true)
-    }
-  }, [inView, wantSound])
-
-  // Pause audio if the tab is hidden.
-  useEffect(() => {
-    const onVis = () => {
-      const v = videoRef.current
-      if (v && document.hidden) {
+    const apply = () => {
+      if (inView && !muted && !document.hidden) {
+        v.muted = false
+        // Unmuted autoplay may be blocked until the first user gesture; if so the
+        // video keeps playing muted and unlocks on the next interaction (below).
+        void v.play().catch(() => {})
+      } else {
         v.muted = true
-        setMuted(true)
       }
     }
-    document.addEventListener('visibilitychange', onVis)
-    return () => document.removeEventListener('visibilitychange', onVis)
-  }, [])
+    apply()
+    document.addEventListener('visibilitychange', apply)
+    return () => document.removeEventListener('visibilitychange', apply)
+  }, [inView, muted])
+
+  // Browsers block unmuted autoplay until the user interacts with the page, so
+  // start the (default-on) sound on the first gesture while the section is shown.
+  useEffect(() => {
+    const unlock = (e: Event) => {
+      if ((e.target as HTMLElement | null)?.closest?.('.sound-toggle')) return
+      const v = videoRef.current
+      if (v && inView && !muted && !document.hidden) {
+        v.muted = false
+        void v.play().catch(() => {})
+      }
+    }
+    window.addEventListener('pointerdown', unlock)
+    window.addEventListener('keydown', unlock)
+    return () => {
+      window.removeEventListener('pointerdown', unlock)
+      window.removeEventListener('keydown', unlock)
+    }
+  }, [inView, muted])
 
   const points: Point[] = [
     { icon: 'layers', text: t('showcase.p1') },
@@ -152,7 +157,7 @@ export default function Showcase() {
             <button
               type="button"
               className={`sound-toggle ${muted ? 'is-muted' : ''}`}
-              onClick={() => setWantSound((s) => !s)}
+              onClick={() => setMuted((m) => !m)}
               aria-label={soundLabel}
               title={soundLabel}
             >
