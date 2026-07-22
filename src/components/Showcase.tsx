@@ -24,6 +24,8 @@ export default function Showcase() {
   // and the state isn't persisted, so a refresh returns to unmuted.
   const [inView, setInView] = useState(false)
   const [muted, setMuted] = useState(false)
+  // Whether the browser has granted audio playback (needs one user gesture).
+  const unlockedRef = useRef(false)
 
   useEffect(() => {
     const el = ref.current
@@ -36,35 +38,35 @@ export default function Showcase() {
     return () => io.disconnect()
   }, [])
 
-  // Apply the "sound only here" policy on view / mute / tab-visibility changes.
+  // The muted video ALWAYS autoplays and is never paused. We only toggle its
+  // muted flag: sound is on while the section is in view, not muted, the tab is
+  // visible, and audio has been unlocked. (Unmuting before a gesture would pause
+  // the video, which is why it stays muted until then.)
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
     const apply = () => {
-      if (inView && !muted && !document.hidden) {
-        v.muted = false
-        // Unmuted autoplay may be blocked until the first user gesture; if so the
-        // video keeps playing muted and unlocks on the next interaction (below).
-        void v.play().catch(() => {})
-      } else {
-        v.muted = true
-      }
+      v.muted = !(inView && !muted && !document.hidden && unlockedRef.current)
+      if (v.paused) void v.play().catch(() => {})
     }
     apply()
     document.addEventListener('visibilitychange', apply)
     return () => document.removeEventListener('visibilitychange', apply)
   }, [inView, muted])
 
-  // Browsers block unmuted autoplay until the user interacts with the page, so
-  // start the (default-on) sound on the first gesture while the section is shown.
+  // Grant audio on the first user interaction (browser autoplay policy), then
+  // apply the current sound state without ever pausing the video.
   useEffect(() => {
-    const unlock = (e: Event) => {
-      if ((e.target as HTMLElement | null)?.closest?.('.sound-toggle')) return
+    if (unlockedRef.current) return
+    const unlock = () => {
+      unlockedRef.current = true
       const v = videoRef.current
-      if (v && inView && !muted && !document.hidden) {
-        v.muted = false
-        void v.play().catch(() => {})
+      if (v) {
+        v.muted = !(inView && !muted && !document.hidden)
+        if (v.paused) void v.play().catch(() => {})
       }
+      window.removeEventListener('pointerdown', unlock)
+      window.removeEventListener('keydown', unlock)
     }
     window.addEventListener('pointerdown', unlock)
     window.addEventListener('keydown', unlock)
