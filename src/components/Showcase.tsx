@@ -162,14 +162,6 @@ export default function Showcase() {
 
           {/* floating stat badges */}
           <motion.div
-            className="showcase-badge b1"
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <Icon name="shield" size={18} />
-            {t('showcase.p1')}
-          </motion.div>
-          <motion.div
             className="showcase-badge b2"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 4.6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
