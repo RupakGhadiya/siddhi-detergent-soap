@@ -232,26 +232,6 @@ const baseProducts: Omit<Product, 'image'>[] = [
     sizes: { en: 'Big Bar · MRP ₹12', gu: 'બિગ બાર · MRP ₹૧૨' },
   },
   {
-    id: 'prasiddhi-coconut-shampoo',
-    category: 'care',
-    icon: 'shampoo',
-    accent: '#8d6e63',
-    accent2: '#4e342e',
-    tag: { en: 'Herbal', gu: 'હર્બલ' },
-    name: { en: 'Prasiddhi Coconut Herbal Shampoo', gu: 'પ્રસિદ્ધિ કોકોનટ હર્બલ શેમ્પૂ' },
-    subtitle: { en: 'Shampoo + Conditioner', gu: 'શેમ્પૂ + કંડિશનર' },
-    desc: {
-      en: 'A herbal coconut shampoo with built-in conditioner for long, strong, shiny and black hair. The purity of Saurashtra in every wash.',
-      gu: 'લાંબા, મજબૂત, ચમકદાર અને કાળા વાળ માટે કંડિશનર સાથેનું હર્બલ કોકોનટ શેમ્પૂ. દરેક વોશમાં સૌરાષ્ટ્રની શુદ્ધતા.',
-    },
-    features: [
-      { en: 'Shampoo + Conditioner', gu: 'શેમ્પૂ + કંડિશનર' },
-      { en: 'Long & Strong Hair', gu: 'લાંબા અને મજબૂત વાળ' },
-      { en: 'Shiny & Black', gu: 'ચમકદાર અને કાળા' },
-    ],
-    sizes: { en: 'Herbal coconut formula', gu: 'હર્બલ કોકોનટ ફોર્મ્યુલા' },
-  },
-  {
     id: 'prasiddhi-amla-shampoo',
     category: 'care',
     icon: 'herbal',
