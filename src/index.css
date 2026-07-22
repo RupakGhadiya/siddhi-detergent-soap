@@ -1961,21 +1961,20 @@ a.mi-value.link:hover {
 }
 .showcase-frame {
   position: relative;
-  aspect-ratio: 3 / 2;
-  border-radius: 28px;
+  aspect-ratio: 16 / 9; /* matches the 1280x720 video — no cropping */
+  border-radius: 24px;
   overflow: hidden;
-  background: #fff;
+  background: #06284f;
   border: 1px solid var(--line);
   box-shadow: var(--shadow-lg);
 }
 .showcase-frame img,
 .showcase-frame video {
   position: absolute;
-  top: -16%;
-  left: 0;
+  inset: 0;
   width: 100%;
-  height: 132%;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain; /* show the whole frame, never crop the sides */
   display: block;
 }
 
@@ -2065,30 +2064,27 @@ a.mi-value.link:hover {
   }
 }
 
-/* ---- Header logo chip (replaces wordmark) ---- */
+/* ---- Header logo (no box; light edges masked away) ---- */
 .brand-logo {
   display: block;
-  height: 46px;
-  width: 118px;
-  border-radius: 12px;
+  height: 58px;
+  width: 178px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(255, 255, 255, 0.6);
   flex-shrink: 0;
+  /* Fade the logo image's rectangular edges so there's no visible box. */
+  -webkit-mask-image: radial-gradient(120% 135% at 50% 50%, #000 50%, transparent 84%);
+  mask-image: radial-gradient(120% 135% at 50% 50%, #000 50%, transparent 84%);
 }
 .brand-logo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
-.nav.scrolled .brand-logo {
-  border-color: var(--line);
-}
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .brand-logo {
-    width: 104px;
-    height: 42px;
+    height: 50px;
+    width: 152px;
   }
 }

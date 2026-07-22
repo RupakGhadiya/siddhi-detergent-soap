@@ -135,8 +135,9 @@ export default function Showcase() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            style={{ y: imgY }}
           >
-            <motion.video
+            <video
               ref={videoRef}
               src={ALL_IN_ONE_VIDEO}
               poster={ALL_IN_ONE}
@@ -145,7 +146,6 @@ export default function Showcase() {
               muted
               playsInline
               preload="metadata"
-              style={{ y: imgY }}
             />
             <span className="showcase-glow" aria-hidden="true" />
 
